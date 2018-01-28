@@ -128,7 +128,7 @@ class Player(object):
     def play(self, card):
         """Plays a card and removes it from hand"""
         self.cards.remove(card)
-        self.game.play_card(card)
+        self.game.play_card(card, player_cards=self.cards)
 
     def playable_cards(self):
         """Returns a list of the cards this player can play right now"""

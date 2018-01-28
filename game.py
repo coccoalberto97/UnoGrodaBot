@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Telegram bot to play UNO in group chats
@@ -39,6 +39,9 @@ class Game(object):
     owner = ADMIN_LIST
     open = OPEN_LOBBY
     translate = ENABLE_TRANSLATIONS
+    count_skips = 0
+    count_reverses = 0
+    multiple_down = False
 
     def __init__(self, chat):
         self.chat = chat
@@ -101,14 +104,27 @@ class Game(object):
 
         self.play_card(self.last_card)
 
-    def play_card(self, card):
+    def play_card(self, card, **kwargs):
         """
         Plays a card and triggers its effects.
         Should be called only from Player.play or on game start to play the
         first card
         """
+        if 'player_cards' in kwargs:
+            player_cards = kwargs['player_cards']
+        else:
+            player_cards = list()
+
         self.deck.dismiss(self.last_card)
         self.last_card = card
+
+        self.multiple_down = False
+        if player_cards:
+            for player_card in player_cards:
+                if player_card.value == card.value and not \
+                        (player_card.special or card.special) and not \
+                        (card.value == c.DRAW_TWO or card.value == c.REVERSE or card.value == c.SKIP):
+                    multiple_down = True
 
         self.logger.info("Playing card " + repr(card))
         if card.value == c.SKIP:
@@ -127,11 +143,16 @@ class Game(object):
                 self.reverse()
 
         # Don't turn if the current player has to choose a color
-        if card.special not in (c.CHOOSE, c.DRAW_FOUR):
-            self.turn()
-        else:
+        if card.special in (c.CHOOSE, c.DRAW_FOUR):
             self.logger.debug("Choosing Color...")
             self.choosing_color = True
+        # elif dont_turn:
+            # Don't turn
+            # self.logger.debug("Player can play other cards")
+        else:
+            # DO turn
+            self.turn()
+
 
     def choose_color(self, color):
         """Carries out the color choosing and turns the game"""

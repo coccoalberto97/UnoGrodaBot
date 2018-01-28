@@ -694,7 +694,7 @@ def process_result(bot, update, job_queue):
 
     if game_is_running(game):
         send_async(bot, chat.id,
-                   text=__("Next player: {name}", multi=game.translate)
+                   text=__("Next player: @{name}", multi=game.translate)
                    .format(name=display_name(game.current_player.user)))
         start_player_countdown(bot, game, job_queue)
 

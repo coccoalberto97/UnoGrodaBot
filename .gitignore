@@ -69,3 +69,5 @@ target/
 
 # Database file
 uno.sqlite3
+config.json.example
+config.json

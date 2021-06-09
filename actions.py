@@ -101,7 +101,7 @@ def do_play_card(bot, player, result_id):
         send_async(bot, chat.id, text=_("Please choose a color"))
 
     if len(player.cards) == 1:
-        send_async(bot, chat.id, text="UNO!")
+        send_async(bot, chat.id, text="NOH!")
 
     if len(player.cards) == 0:
         send_async(bot, chat.id,

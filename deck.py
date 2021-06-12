@@ -72,11 +72,11 @@ class Deck(object):
 
         self.logger.info("Giocatori attualmente connessi %d", players.count)
         # ogni 10 giocatori aggiungo un masso
-        decks: int = int(len(players)//10) + 1
+        decks: int = int(len(players)//10) + 1 + 1
         self.cards.clear()
 
         self.logger.info("Giochiamo con %d mazzi", decks)
-        for deck in range(decks):
+        for index in range(decks):
             for color in c.COLORS:
                 for value in c.VALUES:
                     self.cards.append(Card(color, value))
@@ -84,7 +84,10 @@ class Deck(object):
                         self.cards.append(Card(color, value))
             for special in c.SPECIALS:
                 for _ in range(4):
-                    self.cards.append(Card(None, None, special=special))
+                    self.cards.append(Card(None, None, special=special))        
+            self.logger.info("Aggiunto mazzo numero %d", index)
+             
+        self.logger.info("Mischio")
         self.shuffle()
 
     def _fill_wild_(self):

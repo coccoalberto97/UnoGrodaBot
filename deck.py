@@ -72,7 +72,7 @@ class Deck(object):
 
         self.logger.info("Giocatori attualmente connessi %d", players.count)
         # ogni 10 giocatori aggiungo un masso
-        decks: int = int(players.count()//10) + 1
+        decks: int = int(len(players)//10) + 1
         self.cards.clear()
 
         self.logger.info("Giochiamo con %d mazzi", decks)

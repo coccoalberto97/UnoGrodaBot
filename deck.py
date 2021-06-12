@@ -62,7 +62,7 @@ class Deck(object):
 
     def _fill_classic_(self):
         # Fill deck with the classic card set
-        self.logger.debug("todo num players ", self)
+        self.logger.error("todo num players ", self)
         self.cards.clear()
         for color in c.COLORS:
             for value in c.VALUES:

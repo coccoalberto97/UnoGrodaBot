@@ -20,6 +20,7 @@
 
 from random import shuffle
 import logging
+import json
 
 import card as c
 from card import Card
@@ -62,7 +63,10 @@ class Deck(object):
 
     def _fill_classic_(self):
         # Fill deck with the classic card set
-        self.logger.debug("self object print %s", self)
+
+        self.logger.debug("_fill_classic_")
+        
+        self.logger.debug("self object print "+json.dumps(d))
         self.cards.clear()
         for color in c.COLORS:
             for value in c.VALUES:

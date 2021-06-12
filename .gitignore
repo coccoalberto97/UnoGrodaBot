@@ -74,3 +74,6 @@ config.json
 
 #dev bashes
 restart.sh
+
+#vscode
+.vscode

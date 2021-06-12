@@ -93,6 +93,9 @@ class GameManager(object):
             players = self.userid_players[user.id]
 
         player = Player(game, user)
+
+        game.deck.player_joined(game.players, game.started)
+
         if game.started:
             #se il gioco è già iniziato devo controllare se è necessario aggiundere mazzi
             player.draw_first_hand()

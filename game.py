@@ -45,7 +45,7 @@ class Game(object):
         self.chat = chat
         self.last_card = None
 
-        self.deck = Deck(self.players)
+        self.deck = Deck()
 
         self.logger = logging.getLogger(__name__)
 
@@ -66,7 +66,7 @@ class Game(object):
 
     def start(self):
         if self.mode == None or self.mode != "wild":
-            self.deck._fill_classic_(self.players)
+            self.deck._fill_classic_()
         else:
             self.deck._fill_wild_()
 

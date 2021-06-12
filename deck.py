@@ -32,18 +32,50 @@ from errors import DeckEmptyError
 class Deck(object):
     """ This class represents a deck of cards """
 
-    def __init__(self, players: list):
+    def __init__(self):
         self.cards = list()
         self.graveyard = list()
         self.logger = logging.getLogger(__name__)
         self.current_decks = 1
         self.logger.debug(self.cards)
-        self.players = players
 
-    def shuffle(self):
+    def player_joined(self, players: list, game_started: bool):
+        # attrs = vars(players) variabili di un oggetto per print
+        # ', '.join(map(str, players)) stringify della classe e concateno separato da ,
+        # ogni 10 giocatori aggiungo un mazzo
+        decks: int = int(len(players)//10) + 1
+
+        if decks > self.current_decks:
+            self.current_decks = decks
+            ##se il gioco è iniziato creo un mazzo lo mischio e lo aggiungo al pool delle carte
+            if game_started:
+                self.logger.info("aggiungo un mazzo, mazzi correnti %d ", self.current_decks)
+                new_deck = self.add_deck()
+                self.shuffle(new_deck)
+                self.cards.extend(new_deck)
+                self.logger.info("carte correnti %d ", len(self.cards))
+
+
+    def add_deck(self):
+        """Add one Deck to the card Pool"""
+        self.logger.debug("Adding Deck")
+        cards: list = list()
+        for color in c.COLORS:
+            for value in c.VALUES:
+                    cards.append(Card(color, value))
+                    if not value == c.ZERO:
+                        cards.append(Card(color, value))
+            for special in c.SPECIALS:
+                for _ in range(4):
+                    cards.append(Card(None, None, special=special))  
+
+        return cards;    
+
+
+    def shuffle(self, cards: list):
         """Shuffles the deck"""
         self.logger.debug("Shuffling Deck")
-        shuffle(self.cards)
+        shuffle(cards)
 
     def draw(self):
         """Draws a card from this deck"""
@@ -68,28 +100,15 @@ class Deck(object):
         # Fill deck with the classic card set
 
         self.logger.info("_fill_classic_")
-        # attrs = vars(players) variabili di un oggetto per print
-        # ', '.join(map(str, players)) stringify della classe e concateno separato da ,
-
-        self.logger.info("Giocatori attualmente connessi %d", self.players.count)
-        # ogni 10 giocatori aggiungo un masso
-        decks: int = int(len(self.players)//10) + 1
         self.cards.clear()
 
-        self.logger.info("Giochiamo con %d mazzi", decks)
-        for index in range(decks):
-            for color in c.COLORS:
-                for value in c.VALUES:
-                    self.cards.append(Card(color, value))
-                    if not value == c.ZERO:
-                        self.cards.append(Card(color, value))
-            for special in c.SPECIALS:
-                for _ in range(4):
-                    self.cards.append(Card(None, None, special=special))        
+        self.logger.info("Giochiamo con %d mazzi", self.current_decks)
+        for index in range(self.current_decks):
+            self.cards.extend(self.add_deck())  
             self.logger.info("Aggiunto mazzo numero %d", index)
              
-        self.logger.info("Mischio")
-        self.shuffle()
+        self.logger.info("Mischio tutto")
+        self.shuffle(self.cards)
 
     def _fill_wild_(self):
         # Fill deck with a wild card set

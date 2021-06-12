@@ -62,7 +62,7 @@ class Deck(object):
         """Returns a card to the deck"""
         self.graveyard.append(card)
 
-    def _fill_classic_(self, players: list[Player]):
+    def _fill_classic_(self, players: list):
         # Fill deck with the classic card set
 
         self.logger.info("_fill_classic_")

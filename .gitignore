@@ -71,3 +71,6 @@ target/
 uno.sqlite3
 config.json.example
 config.json
+
+#dev bashes
+restart.sh

@@ -71,9 +71,9 @@ class Deck(object):
         # attrs = vars(players) variabili di un oggetto per print
         # ', '.join(map(str, players)) stringify della classe e concateno separato da ,
 
-        self.logger.info("Giocatori attualmente connessi %d", players.count)
+        self.logger.info("Giocatori attualmente connessi %d", self.players.count)
         # ogni 10 giocatori aggiungo un masso
-        decks: int = int(len(players)//10) + 1
+        decks: int = int(len(self.players)//10) + 1
         self.cards.clear()
 
         self.logger.info("Giochiamo con %d mazzi", decks)

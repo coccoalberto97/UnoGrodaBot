@@ -45,7 +45,7 @@ class Game(object):
         self.chat = chat
         self.last_card = None
 
-        self.deck = Deck()
+        self.deck = Deck(self.players)
 
         self.logger = logging.getLogger(__name__)
 

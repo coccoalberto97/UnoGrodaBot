@@ -18,6 +18,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
+import operator
 from player import Player
 from random import shuffle
 import logging
@@ -71,7 +72,7 @@ class Deck(object):
 
         self.logger.info("Giocatori attualmente connessi %d", players.count)
         # ogni 10 giocatori aggiungo un masso
-        decks: int = int(players.count.__div__(self, 10)) + 1
+        decks: int = int(operator.__div__(players.count, 10)) + 1
         self.cards.clear()
 
         self.logger.info("Giochiamo con %d mazzi", decks)

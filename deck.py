@@ -61,13 +61,13 @@ class Deck(object):
         """Returns a card to the deck"""
         self.graveyard.append(card)
 
-    def _fill_classic_(self, players):
+    def _fill_classic_(self, players: list):
         # Fill deck with the classic card set
 
         self.logger.info("_fill_classic_")
         
         #attrs = vars(players)
-        self.logger.info("self object print "+', '.join("%s: %s" % item for item in players.items()))
+        self.logger.info("self object print "+', '.join("%s: %s" % item for item in players))
         self.cards.clear()
         for color in c.COLORS:
             for value in c.VALUES:

@@ -67,7 +67,9 @@ class Deck(object):
         self.logger.info("_fill_classic_")
         
         #attrs = vars(players)
-        self.logger.info("self object print "+', '.join("%s: %s" % item for item in players))
+        
+
+        self.logger.info("self object print "+', '.join(map(str, players)))
         self.cards.clear()
         for color in c.COLORS:
             for value in c.VALUES:

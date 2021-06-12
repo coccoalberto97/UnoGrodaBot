@@ -19,6 +19,7 @@
 
 
 import logging
+from player import Player
 from config import ADMIN_LIST, OPEN_LOBBY, DEFAULT_GAMEMODE, ENABLE_TRANSLATIONS
 from datetime import datetime
 
@@ -51,7 +52,7 @@ class Game(object):
     @property
     def players(self):
         """Returns a list of all players in this game"""
-        players = list()
+        players = list[Player]()
         if not self.current_player:
             return players
 

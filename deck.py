@@ -18,6 +18,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
+from player import Player
 from random import shuffle
 import logging
 import json
@@ -61,24 +62,28 @@ class Deck(object):
         """Returns a card to the deck"""
         self.graveyard.append(card)
 
-    def _fill_classic_(self, players: list):
+    def _fill_classic_(self, players: list[Player]):
         # Fill deck with the classic card set
 
         self.logger.info("_fill_classic_")
-        
-        #attrs = vars(players)
-        
+        # attrs = vars(players) variabili di un oggetto per print
+        # ', '.join(map(str, players)) stringify della classe e concateno separato da ,
 
-        self.logger.info("self object print "+', '.join(map(str, players)))
+        self.logger.info("Giocatori attualmente connessi %d", players.count)
+        # ogni 10 giocatori aggiungo un masso
+        decks: int = int(players.count/10) + 1
         self.cards.clear()
-        for color in c.COLORS:
-            for value in c.VALUES:
-                self.cards.append(Card(color, value))
-                if not value == c.ZERO:
+
+        self.logger.info("Giochiamo con %d mazzi", decks)
+        for deck in len(decks):
+            for color in c.COLORS:
+                for value in c.VALUES:
                     self.cards.append(Card(color, value))
-        for special in c.SPECIALS:
-            for _ in range(4):
-                self.cards.append(Card(None, None, special=special))
+                    if not value == c.ZERO:
+                        self.cards.append(Card(color, value))
+            for special in c.SPECIALS:
+                for _ in range(4):
+                    self.cards.append(Card(None, None, special=special))
         self.shuffle()
 
     def _fill_wild_(self):

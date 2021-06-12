@@ -64,10 +64,10 @@ class Deck(object):
     def _fill_classic_(self):
         # Fill deck with the classic card set
 
-        self.logger.debug("_fill_classic_")
+        self.logger.info("_fill_classic_")
         
         attrs = vars(self)
-        self.logger.debug("self object print "+', '.join("%s: %s" % item for item in attrs.items()))
+        self.logger.info("self object print "+', '.join("%s: %s" % item for item in attrs.items()))
         self.cards.clear()
         for color in c.COLORS:
             for value in c.VALUES:

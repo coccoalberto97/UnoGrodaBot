@@ -66,7 +66,7 @@ class Deck(object):
 
         self.logger.debug("_fill_classic_")
         
-        self.logger.debug("self object print "+json.dumps(d))
+        self.logger.debug("self object print "+json.dumps(self))
         self.cards.clear()
         for color in c.COLORS:
             for value in c.VALUES:

@@ -62,7 +62,7 @@ class GameManager(object):
         self.logger.info("Joining game with id " + str(chat.id))
 
         try:
-            game = self.chatid_games[chat.id][-1]
+            game: Game = self.chatid_games[chat.id][-1]
         except (KeyError, IndexError):
             raise NoGameInChatError()
 
@@ -94,6 +94,7 @@ class GameManager(object):
 
         player = Player(game, user)
         if game.started:
+            #se il gioco è già iniziato devo controllare se è necessario aggiundere mazzi
             player.draw_first_hand()
 
         players.append(player)

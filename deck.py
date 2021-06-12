@@ -32,12 +32,13 @@ from errors import DeckEmptyError
 class Deck(object):
     """ This class represents a deck of cards """
 
-    def __init__(self):
+    def __init__(self, players: list):
         self.cards = list()
         self.graveyard = list()
         self.logger = logging.getLogger(__name__)
-
+        self.current_decks = 1
         self.logger.debug(self.cards)
+        self.players = players
 
     def shuffle(self):
         """Shuffles the deck"""
@@ -63,7 +64,7 @@ class Deck(object):
         """Returns a card to the deck"""
         self.graveyard.append(card)
 
-    def _fill_classic_(self, players: list):
+    def _fill_classic_(self):
         # Fill deck with the classic card set
 
         self.logger.info("_fill_classic_")
@@ -72,7 +73,7 @@ class Deck(object):
 
         self.logger.info("Giocatori attualmente connessi %d", players.count)
         # ogni 10 giocatori aggiungo un masso
-        decks: int = int(len(players)//10) + 1 + 1
+        decks: int = int(len(players)//10) + 1
         self.cards.clear()
 
         self.logger.info("Giochiamo con %d mazzi", decks)

@@ -76,7 +76,7 @@ class Deck(object):
         self.cards.clear()
 
         self.logger.info("Giochiamo con %d mazzi", decks)
-        for deck in len(decks):
+        for deck in range(decks):
             for color in c.COLORS:
                 for value in c.VALUES:
                     self.cards.append(Card(color, value))

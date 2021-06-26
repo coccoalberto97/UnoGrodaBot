@@ -43,7 +43,7 @@ class Deck(object):
         # attrs = vars(players) variabili di un oggetto per print
         # ', '.join(map(str, players)) stringify della classe e concateno separato da ,
         # ogni 10 giocatori aggiungo un mazzo
-        decks: int = int(len(players)//10) + 1
+        decks: int = int(len(players)//11)
 
         if decks > self.current_decks:
             self.current_decks = decks

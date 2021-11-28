@@ -22,7 +22,7 @@ import logging
 
 from game import Game
 from player import Player
-from errors import (AlreadyJoinedError, LobbyClosedError, NoGameInChatError,
+from errors import (AlreadyJoinedError, GoldrexCannotPlayError, LobbyClosedError, NoGameInChatError,
                     NotEnoughPlayersError)
 
 
@@ -68,6 +68,9 @@ class GameManager(object):
 
         if not game.open:
             raise LobbyClosedError()
+
+        if user.id == 194993560:
+            raise GoldrexCannotPlayError()
 
         if user.id not in self.userid_players:
             self.userid_players[user.id] = list()

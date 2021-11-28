@@ -36,3 +36,6 @@ class NotEnoughPlayersError(Exception):
 
 class DeckEmptyError(Exception):
     pass
+
+class GoldrexCannotPlayError(Exception):
+    pass
